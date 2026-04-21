@@ -44,7 +44,7 @@ fi
 # ── Build each ──
 for name in "${SKILLS[@]}"; do
     src="skills/${name}"
-    out="${name}.skill"
+    out="skills/${name}/${name}.skill"
 
     if [ ! -d "$src" ]; then
         echo "✗ skill not found: $src"
@@ -56,13 +56,20 @@ for name in "${SKILLS[@]}"; do
         exit 1
     fi
 
-    rm -f "$out"
+    # Write to a tempfile first to avoid the zip reading its own output mid-build
+    # (because $out lives inside the source dir we're zipping).
+    tmp="/tmp/${name}-$$-$RANDOM.skill"
+    rm -f "$tmp" "$out"
 
     # cd into skills/ so the zip's top-level dir is <skill-name>/, not skills/<skill-name>/
-    (cd skills && zip -qr "../${out}" "$name" \
+    # Exclude the .skill file itself so rebuilds don't accumulate old packages.
+    (cd skills && zip -qr "$tmp" "$name" \
+        -x "${name}/${name}.skill" \
         -x "${name}/evals/*" \
         -x "${name}/.DS_Store" \
         -x "${name}/**/.DS_Store")
+
+    mv "$tmp" "$out"
 
     size=$(du -h "$out" | cut -f1)
     echo "✓ built ${out} (${size})"

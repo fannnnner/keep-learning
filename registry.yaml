@@ -5,8 +5,8 @@ repo: https://github.com/fannnnner/keep-learning
 # Only skills listed here get installed by install.sh.
 # To add a new skill: drop it under skills/<name>/, then add an entry below.
 skills:
-  - name: learn
-    path: skills/learn
+  - name: meta-learn
+    path: skills/meta-learn
     description: Fan's 6-step adaptive learning coach — evaluate, map, dialogue, verify, practice, integrate
     version: 4
     tags:

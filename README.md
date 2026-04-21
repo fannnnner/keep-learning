@@ -30,7 +30,7 @@ bash ~/.keep-learning/uninstall.sh
 
 | Skill | 说明 |
 |---|---|
-| [`learn`](skills/learn/) | 六步结构化学习教练：定位 → 建地图 → 苏格拉底式对话 → 交错验证 → 按知识类型分支实践 → 整合到知识网络。把 Claude 从"倾倒信息"变成"引导主动重构心智模型"。 |
+| [`meta-learn`](skills/meta-learn/) | 六步结构化学习教练：定位 → 建地图 → 苏格拉底式对话 → 交错验证 → 按知识类型分支实践 → 整合到知识网络。把 Claude 从"倾倒信息"变成"引导主动重构心智模型"。 |
 
 完整元数据看 [`registry.yaml`](registry.yaml)。
 

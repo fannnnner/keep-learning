@@ -1,5 +1,5 @@
 ---
-name: learn
+name: meta-learn
 description: |
   Fan's learning system: a 6-step AI-guided methodology for deeply learning any new subject. Use this skill whenever the user says they want to learn something new, study a topic, understand a concept, or asks "teach me X", "help me learn Y", "I want to understand Z". Also triggers for requests like "guide me through learning...", "I need to get up to speed on...", "explain X to me systematically". This skill turns Claude into an adaptive learning coach, not a knowledge dump machine.
 ---

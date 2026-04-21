@@ -4,16 +4,28 @@
 
 ## 安装
 
+**方式 1：curl 装所有 skill（推荐）**
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/fannnnner/keep-learning/main/install.sh | bash
 ```
 
-装好后重启 Claude Code 就能用。再跑一次上面这条命令等于更新。
+clone 仓库到 `~/.keep-learning/`，按 symlink 安装到 `~/.claude/skills/`。装好后重启 Claude Code 就能用。再跑一次等于更新。
 
-**改装到别的目录**：
+**方式 2：直接下载单个 `.skill` 文件**
+
+仓库根目录有打包好的 `.skill` 文件，可以直接下载装：
 
 ```bash
-# 装到 Kiro 而不是 Claude Code
+curl -LO https://github.com/fannnnner/keep-learning/raw/main/meta-learn.skill
+# 然后用 Claude Code 的 /skills install 或手动解压到 ~/.claude/skills/
+```
+
+适合：不想装整个仓库，只要某个 skill；或者分享给别人装单个 skill。
+
+**改装到别的目录**（仅方式 1）：
+
+```bash
 KEEP_LEARNING_SKILLS_DIR=~/.kiro/skills \
   curl -sSL https://raw.githubusercontent.com/fannnnner/keep-learning/main/install.sh | bash
 ```
@@ -44,12 +56,17 @@ bash ~/.keep-learning/uninstall.sh
 
 1. 在 `skills/<name>/` 下放 `SKILL.md`（可选 `references/`、`scripts/` 等）
 2. 在 `registry.yaml` 的 `skills:` 下加一条
-3. commit + push
-4. 本地（或所有装过 keep-learning 的机器）跑一次 `curl ... | bash` 就能拉到新 skill
+3. 跑 `./build.sh` 生成对应的 `<name>.skill` 文件
+4. commit + push（把源文件和 `.skill` 一起提交）
+5. 本地跑一次 `curl ... | bash` 就能拉到新 skill
 
 ## 改已有 skill
 
-直接改仓库里 `skills/<name>/` 下的文件，push。由于安装用的是 symlink，远程 `git pull` 后本地立刻生效。本地如果对某个 skill 做了直接修改（不是 commit 到仓库），`install.sh` 再次运行时会以仓库版为准覆盖——本地修改请走 PR，不要直接改安装后的文件。
+1. 改 `skills/<name>/` 下的文件
+2. 跑 `./build.sh <name>` 重新打包 `.skill`
+3. commit + push
+
+由于安装用的是 symlink，远程 `git pull` 后本地立刻生效。本地如果对某个 skill 做了直接修改（不是 commit 到仓库），`install.sh` 再次运行时会以仓库版为准覆盖——本地修改请走 PR，不要直接改安装后的文件。
 
 ## 兼容性
 
